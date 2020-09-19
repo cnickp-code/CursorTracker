@@ -17,8 +17,6 @@ function App(props) {
   useEffect(() => {
     setTimeout(() => {
       handlePermitModal(true);
-      console.log('modal1: true')
-      console.log(permitModal);
     }, 5000)
   }, [])
 
@@ -31,13 +29,11 @@ function App(props) {
   }
 
   if(y === 0 && permitModal) {
-    console.log('modal toggled')
     toggleModal();
     handlePermitModal(false);
 
     setTimeout(() => {
       handlePermitModal(true);
-      console.log('long modal toggled')
     }, 5000);
   }
 
