@@ -44,8 +44,8 @@ function App(props) {
       {/* <button onClick={toggleModal}>Click me</button> */}
       <h1>
         {hasMovedCursor
-          ? `Your cursor is at ${x}, ${y}.`
-          : "Move your mouse around."}
+          ? `Cursor is at ${x}, ${y}.`
+          : "Move mouse."}
       </h1>
 
       <AppModal />
