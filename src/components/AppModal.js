@@ -11,9 +11,9 @@ function AppModal(props) {
     const [catImage, setCatImage] = useState();
     const [catName, setCatName] = useState();
     const [loading, setLoading] = useState(false);
-    const { 
-        showModal, 
-        handleShowModal 
+    const {
+        showModal,
+        handleShowModal
     } = useContext(MainContext);
 
     useEffect(() => {
@@ -31,12 +31,12 @@ function AppModal(props) {
         handleShowModal(false);
         setLoading(true);
         randCatName();
-        
+
         CatApiService.getCat()
-        .then(cat => {
-            setCatImage(cat[0].url);
-            setLoading(false);
-        })
+            .then(cat => {
+                setCatImage(cat[0].url);
+                setLoading(false);
+            })
     }
 
     const randCatName = () => {
@@ -48,17 +48,17 @@ function AppModal(props) {
         <Modal show={showModal} onHide={handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>
-                    {loading && <p>Purr...</p>}
-                    {!loading && 
-                    <div className="modal-container">
-                        <img src={catImage} className="modal-image" alt="kitty" />
-                    </div>
-                    }
                 </Modal.Title>
             </Modal.Header>
 
             <Modal.Body>
-                <p>Please stayyyyy! {catName} said so!</p>
+                {loading && <p>Purr...</p>}
+                {!loading &&
+                    <div className="modal-container">
+                        <img src={catImage} className="modal-image" alt="kitty" />
+                    </div>
+                }
+                <p className="modal-text">Please stayyyyy! {catName} said so!</p>
             </Modal.Body>
 
             <Modal.Footer>
