@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 
 const MainContext = React.createContext({
     showModal: false,
-    handleShowModal: () => {}
+    permitModal: false,
+
+    handleShowModal: () => {},
+    handlePermitModal: () => {}
 })
 
 export default MainContext;
@@ -11,7 +14,8 @@ export class MainContextProvider extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            showModal: false
+            showModal: false,
+            permitModal: false,
         }
     }
 
@@ -21,11 +25,19 @@ export class MainContextProvider extends Component {
         })
     }
 
+    handlePermitModal = (permitModal) => {
+        this.setState({
+            permitModal
+        })
+    }
+
     render() {
         const value = {
             showModal: this.state.showModal,
+            permitModal: this.state.permitModal,
 
-            handleShowModal: this.handleShowModal
+            handleShowModal: this.handleShowModal,
+            handlePermitModal: this.handlePermitModal,
         }
         return (
             <MainContext.Provider value={value}>
