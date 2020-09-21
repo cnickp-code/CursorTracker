@@ -4,31 +4,44 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AppModal from './components/AppModal'
 import MainContext from './contexts/MainContext';
-import useMousePosition from './hooks/useMousePosition';
+import useCursorPos  from './hooks/useCursorPos';
+import CatApiService from './services/cat-api-service';
 
 function App(props) {
+  const [catImage, setCatImage] = useState();
 
   const {
+    showModal,
     permitModal,
     handlePermitModal,
     handleShowModal
   } = useContext(MainContext)
 
   useEffect(() => {
+    handleCatApi();
+
     setTimeout(() => {
       handlePermitModal(true);
     }, 5000)
   }, [])
 
-  const { x, y } = useMousePosition();
+  const handleCatApi = () => {
+    CatApiService.getCat()
+      .then(cat => {
+        setCatImage(cat[0].url);
+      })
+  }
+
+  const { x, y } = useCursorPos();
 
   const hasMovedCursor = typeof x === "number" && typeof y === "number";
 
   const toggleModal = () => {
     handleShowModal(true);
+    handleCatApi();
   }
 
-  if(y === 0 && permitModal) {
+  if (y === 0 && permitModal && !showModal) {
     toggleModal();
     handlePermitModal(false);
 
@@ -48,7 +61,7 @@ function App(props) {
           : "Move mouse."}
       </h1>
 
-      <AppModal />
+      <AppModal catImage={catImage} setCatImage={setCatImage} />
     </div>
   );
 }
