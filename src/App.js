@@ -55,11 +55,11 @@ function App(props) {
       <h1>Random site title!</h1>
       <p>Random site body!</p>
       {/* <button onClick={toggleModal}>Click me</button> */}
-      <h1>
+      {/* <h1>
         {hasMovedCursor
           ? `Cursor is at ${x}, ${y}.`
           : "Move mouse."}
-      </h1>
+      </h1> */}
 
       <AppModal catImage={catImage} setCatImage={setCatImage} />
     </div>
